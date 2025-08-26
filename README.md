@@ -2,7 +2,7 @@
 
 
 ## [Apt-Cacher NG](https://www.unix-ag.uni-kl.de/~bloch/acng/)
-[tetsuyainfra/proxy-acng](https://hub.docker.com/r/tetsuyainfra/proxy-acng)
+[tetsuyainfra/proxies-acng](https://hub.docker.com/r/tetsuyainfra/proxies-acng)
 
 ### environment
 
