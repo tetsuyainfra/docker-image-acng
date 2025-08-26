@@ -38,6 +38,11 @@ conf_acng: $(ACNG_BUILD_FILE)
 	docker container cp $$CONTAINER_ID:/etc/apt-cacher-ng ./tmp ; \
 	docker container rm $$CONTAINER_ID
 
+rocks_acng: $(ACNG_BUILD_FILE)
+	CONTAINER_ID=$$(docker create acng:latest) ; \
+	docker container cp $$CONTAINER_ID:/usr/share/rocks/packages.list ./tmp ; \
+	docker container rm $$CONTAINER_ID
+
 #
 # Squid
 #
