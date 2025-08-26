@@ -20,6 +20,7 @@ RUN set -eux; \
         (dpkg-query -f '${binary:Package},${Version}\n' -W | sort) > /usr/share/rocks/packages.list
 
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+# COPY /conf/ /etc/apt-cacher-ng/
 
 EXPOSE  3142
 VOLUME  ["/var/cache/apt-cacher-ng", "/var/log/apt-cacher-ng", "/etc/apt-cacher-ng"]
