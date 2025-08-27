@@ -1,7 +1,10 @@
 # docker-image-acng
+[![Docker](https://github.com/tetsuyainfra/docker-image-acng/actions/workflows/docker-acng.yml/badge.svg?branch=main)](https://github.com/tetsuyainfra/docker-image-acng/actions/workflows/docker-acng.yml)
+[![Docker Image Version](https://img.shields.io/docker/v/tetsuyainfra/acng)](https://hub.docker.com/r/tetsuyainfra/acng)
 
-## [Apt-Cacher NG](https://www.unix-ag.uni-kl.de/~bloch/acng/)
-[tetsuyainfra/acng](https://hub.docker.com/r/tetsuyainfra/acng)
+This is [Apt-Cacher NG](https://www.unix-ag.uni-kl.de/~bloch/acng/)
+
+
 
 ## environment
 
