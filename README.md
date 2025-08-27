@@ -1,7 +1,7 @@
 # docker-image-acng
 
 ## [Apt-Cacher NG](https://www.unix-ag.uni-kl.de/~bloch/acng/)
-[tetsuyainfra/proxies-acng](https://hub.docker.com/r/tetsuyainfra/proxies-acng)
+[tetsuyainfra/acng](https://hub.docker.com/r/tetsuyainfra/acng)
 
 ## environment
 
