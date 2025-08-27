@@ -90,8 +90,11 @@ jobs:
           # 単一プラットフォームでビルドしているのでloadオプションを使える
           # (マルチプラットフォームにするときは, outputオプションをつかう)
           load: true
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          # GithubActionsのキャッシュ(7日間保持)に影響を受ける
+          # cache-from: type=gha
+          # cache-to: type=gha,mode=max
+          # ローカルキャッシュにする
+          cache-to: type=local,dest=./tmp/.buildx-cache
 
       - name: Get package.list in container
         run: |
@@ -128,8 +131,9 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          # cache-from: type=gha
+          # cache-to: type=gha,mode=max
+          cache-from: type=local,dest=./tmp/.buildx-cache
 
       # Sign the resulting Docker image digest except on PRs.
       # This will only write to the public Rekor transparency log when the Docker
