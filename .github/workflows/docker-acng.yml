@@ -95,8 +95,9 @@ jobs:
 
       - name: Get package.list in container
         run: |
-          docker run --rm ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest \
-            --entrypoint cat /usr/share/rocks/packages.list | tee package.list"
+          docker run --rm --entrypoint bash \
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest \
+            -c 'cat /usr/share/rocks/packages.list' | tee package.list
 
       - name: Push Docker image
         id: push
