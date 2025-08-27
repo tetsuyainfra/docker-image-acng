@@ -106,7 +106,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: package.list
-          key: package-list-${{ hashFiles('new_package.list') }}
+          key: commit-${{ github.sha }}_package-list-${{ hashFiles('new_package.list') }}
 
       # キャッシュヒットした→ バージョンが同じ
       # キャッシュヒットしなかった → バージョンが異なる（おそらく新しい
