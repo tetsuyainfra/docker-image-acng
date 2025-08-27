@@ -92,7 +92,7 @@ jobs:
 
       - name: Get package.list in container
         run: |
-          docker run --rm ${{ env.IMAGE_NAME }}:latest \
+          docker run --rm ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest \
             cat /usr/share/rocks/packages.list | tee package.list
 
       - name: Push Docker image
