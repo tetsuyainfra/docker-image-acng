@@ -101,7 +101,6 @@ jobs:
 
       # Cache package.list
       # new_package.listのハッシュ値をキーにしてキャッシュを探す
-      # キャッシュがあったらキャッシュヒット
       - name: Cache package.list
         id: package-list-cache
         uses: actions/cache@v4
@@ -109,18 +108,20 @@ jobs:
           path: package.list
           key: package-list-${{ hashFiles('new_package.list') }}
 
+      # キャッシュヒットした→ バージョンが同じ
       # キャッシュヒットしなかった → バージョンが異なる（おそらく新しい
+      # キャッシュヒットしなかったら
       # actions/cacheにキャッシュしてもらえるようnew_package.listをpackage.listにコピーする
-      - name: Cache hit
-        id: cache_hit
+      - name: Cache hit then will not publish
         if: steps.package-list-cache.outputs.cache-hit != 'true'
+        id: is_published
         run: |
           cp new_package.list package.list
-          echo result=true >> $GITHUB_OUTPUT
+          echo result=false >> $GITHUB_OUTPUT
 
       - name: Push Docker image
         id: push
-        if: steps.cache_hit.outputs.result == 'true'
+        if: steps.is_published.outputs.result == 'false'
         uses: docker/build-push-action@0565240e2d4ab88bba5387d719585280857ece09 # v5.0.0
         with:
           context: ./acng
@@ -136,7 +137,7 @@ jobs:
       # transparency data even for private images, pass --force to cosign below.
       # https://github.com/sigstore/cosign
       - name: Sign the published Docker image
-        if: ${{ github.event_name != 'pull_request' }}
+        if: ${{ steps.is_published.outputs.result == 'false' && github.event_name != 'pull_request' }}
         env:
           # https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions#using-an-intermediate-environment-variable
           TAGS: ${{ steps.meta.outputs.tags }}
